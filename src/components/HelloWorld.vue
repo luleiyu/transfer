@@ -7,9 +7,9 @@
     </div>
 
     <div class="search_parent">
-      <div class="search_div">
-        <input class="search_input" type="text" placeholder="请输入课件级别/编号">
-      </div>
+      <!-- <div class="search_div"> -->
+        <input class="search_input" @input="sourceSearch" :class="heightLight ? 'search_input_focus' : ''" type="text" @focus="heightLight=true" @blur="heightLight=false" placeholder="请输入课件级别/编号">
+      <!-- </div> -->
     </div>
 
     <div @drop="dropPub($event, 2)" @dragover.prevent class="left">
@@ -38,9 +38,9 @@
     </div>
 
     <div class="search_parent">
-      <div class="search_div">
-        <input class="search_input" type="text" placeholder="请输入课件级别/编号">
-      </div>
+      <!-- <div class="search_div"> -->
+        <input class="search_input" @input="targetSearch" :class="heightLight1 ? 'search_input_focus' : ''" @focus="heightLight1=true" @blur="heightLight1=false" type="text" placeholder="请输入课件级别/编号">
+      <!-- </div> -->
     </div>
     
     <div @drop="dropPub($event, 1)" @dragover.prevent class="right">
@@ -62,6 +62,8 @@
 export default {
 data () {
   return {
+    heightLight: false,
+    heightLight1: false,
     data1: [
       {id: 1,value: '项目1', isSelect: false},
       {id: 2,value: '项目2', isSelect: false},
@@ -156,6 +158,13 @@ methods: {
         item.isSelect = true
       }
     })
+  },
+  sourceSearch (val) {
+    console.log(val.target.value)
+    
+  },
+  targetSearch (val) {
+    console.log(val.target.value)
   }
 },
 computed: {
@@ -267,18 +276,24 @@ computed: {
     align-items: center;
     margin: 20px 0;
   }
-  .search_div {
+  /* .search_div {
     border: 1px solid #dddddd;
     border-radius: 20px;
     width: 150px;
     height: 30px;
     padding-left: 10px;
-  }
+  } */
   .search_input {
     width: 150px;
-    height: 30px;
-    border-radius: 20px;
-    border: 0 none;
+    height: 10px;
+    border-radius: 50px;
+    border: 1px solid #ccc;
+    outline: none;
+    padding: 10px 0px 10px 10px;
+    font-size: 14px;
+  }
+  .search_input_focus {
+    border: 1px solid #409eff;
   }
   ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
     color: rgb(192, 196, 204);
