@@ -8,7 +8,7 @@
 
     <div class="search_parent">
       <!-- <div class="search_div"> -->
-        <input class="search_input" @input="sourceSearch" :class="heightLight ? 'search_input_focus' : ''" type="text" @focus="heightLight=true" @blur="heightLight=false" placeholder="请输入课件级别/编号">
+        <input class="search_input" v-model="sourceData" :class="heightLight ? 'search_input_focus' : ''" type="text" @focus="heightLight=true" @blur="heightLight=false" placeholder="请输入课件级别/编号">
       <!-- </div> -->
     </div>
 
@@ -21,7 +21,7 @@
         class="hover-color"
         :class="{active: item.isSelect }" 
         v-on:click="hanldleClick(data1, item.id)" 
-        v-for="item in data1" 
+        v-for="item in changeSourceData" 
         :key="item.id">{{item.value}}</div>
     </div>
   </div>
@@ -39,7 +39,7 @@
 
     <div class="search_parent">
       <!-- <div class="search_div"> -->
-        <input class="search_input" @input="targetSearch" :class="heightLight1 ? 'search_input_focus' : ''" @focus="heightLight1=true" @blur="heightLight1=false" type="text" placeholder="请输入课件级别/编号">
+        <input class="search_input" v-model="targetData" :class="heightLight1 ? 'search_input_focus' : ''" @focus="heightLight1=true" @blur="heightLight1=false" type="text" placeholder="请输入课件级别/编号">
       <!-- </div> -->
     </div>
     
@@ -52,7 +52,7 @@
       draggable="true" 
       :class="{active: item.isSelect }" 
       v-on:click="hanldleClick(data2, item.id)" 
-      v-for="item in data2" 
+      v-for="item in changeTargetData" 
       :key="item.id">{{item.value}}</div>
     </div>
   </div>
@@ -65,16 +65,57 @@ data () {
     heightLight: false,
     heightLight1: false,
     data1: [
-      {id: 1,value: '项目1', isSelect: false},
-      {id: 2,value: '项目2', isSelect: false},
-      {id: 3,value: '项目3', isSelect: false},
-      {id: 4,value: '项目4', isSelect: false},
-      {id: 5,value: '项目5', isSelect: false},
+      {id: 1,value: 'UNYB-line1290', isSelect: false},
+      {id: 2,value: 'UOLB-line0', isSelect: false},
+      {id: 3,value: 'HBYB-lidfne585', isSelect: false},
+      {id: 4,value: 'UNYB-lwe560', isSelect: false},
+      {id: 5,value: 'DFLKYB-ldne3290', isSelect: false},
     ],
-    data2:[{id: 6,value: '项目6', isSelect: false}],
+    data2:[{id: 6,value: 'SRESB-line1290', isSelect: false}],
     target: {
       y: '',
       id: ''
+    },
+    sourceData: '',
+    targetData: '',
+    changeSourceData: [],
+    changeTargetData: []
+  }
+},
+created () {
+  this.changeSourceData = this.data1
+  this.changeTargetData = this.data2
+},
+watch: {
+  data2 () {
+    this.changeTargetData = this.data2
+  },
+  sourceData (val) {
+    let emptyArr = []
+    if (val) {
+      // val = val.toLowerCase()
+      for (let i = 0; i < this.data1.length; i++) {
+        if (this.data1[i].value.indexOf(val) != -1) {
+          emptyArr.push(this.data1[i])
+        }
+      }
+      this.changeSourceData = emptyArr
+    } else {
+      this.changeSourceData = this.data1
+    }
+  },
+  targetData (val) {
+    let emptyArr = []
+    if (val) {
+      // val = val.toLowerCase()
+      for (let i = 0; i < this.data2.length; i++) {
+        if (this.data2[i].value.indexOf(val) != -1) {
+          emptyArr.push(this.data2[i])
+        }
+      }
+      this.changeTargetData = emptyArr
+    } else {
+      this.changeTargetData = this.data2
     }
   }
 },
@@ -181,7 +222,7 @@ computed: {
       return item.isSelect == true
     })
     return arr.length
-  },
+  }
 }
 }
 </script>
