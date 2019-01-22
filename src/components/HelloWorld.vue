@@ -65,7 +65,10 @@ props: {
     type: Array
   },
   targetRight: {
-    type: Array
+    type: Array,
+    default: function () {
+      return []
+    }
   }
 },
 data () {

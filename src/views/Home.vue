@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <HelloWorld :source-left="data1" :target-right="data2"/>
+    <HelloWorld :source-left="data1"/>
   </div>
 </template>
 
