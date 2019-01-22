@@ -60,18 +60,28 @@
 </template>
 <script>
 export default {
+props: {
+  sourceLeft: {
+    type: Array
+  },
+  targetRight: {
+    type: Array
+  }
+},
 data () {
   return {
     heightLight: false,
     heightLight1: false,
     data1: [
-      {id: 1,value: 'UNYB-line1290', isSelect: false},
-      {id: 2,value: 'UOLB-line0', isSelect: false},
-      {id: 3,value: 'HBYB-lidfne585', isSelect: false},
-      {id: 4,value: 'UNYB-lwe560', isSelect: false},
-      {id: 5,value: 'DFLKYB-ldne3290', isSelect: false},
+      // {id: 1,value: 'UNYB-line1290', isSelect: false},
+      // {id: 2,value: 'UOLB-line0', isSelect: false},
+      // {id: 3,value: 'HBYB-lidfne585', isSelect: false},
+      // {id: 4,value: 'UNYB-lwe560', isSelect: false},
+      // {id: 5,value: 'DFLKYB-ldne3290', isSelect: false},
     ],
-    data2:[{id: 6,value: 'SRESB-line1290', isSelect: false}],
+    data2:[
+      // {id: 6,value: 'SRESB-line1290', isSelect: false}
+    ],
     target: {
       y: '',
       id: ''
@@ -83,6 +93,8 @@ data () {
   }
 },
 created () {
+  this.data1 = this.sourceLeft
+  this.data2 = this.targetRight
   this.changeSourceData = this.data1
   this.changeTargetData = this.data2
 },
