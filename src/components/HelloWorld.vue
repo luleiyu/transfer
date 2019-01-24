@@ -61,10 +61,10 @@
 <script>
 export default {
 props: {
-  sourceLeft: {
+  sourceL: {
     type: Array
   },
-  targetRight: {
+  targetR: {
     type: Array,
     default: function () {
       return []
@@ -96,8 +96,9 @@ data () {
   }
 },
 created () {
-  this.data1 = this.sourceLeft
-  this.data2 = this.targetRight
+  this.data1 = this.sourceL
+  this.data2 = this.targetR
+  // conosle.log(this.targetR)
   this.changeSourceData = this.data1
   this.changeTargetData = this.data2
 },

@@ -91,6 +91,7 @@ data () {
   }
 },
 created () {
+  console.log(this.targetRight)
   this.sourceLeft.forEach(item => {
     this.data1.push(
       {
@@ -104,7 +105,22 @@ created () {
   this.changeTargetData = this.data2
 },
 mounted () {
-
+  // console.log(this.targetRight)
+  let empty = []
+    console.log(this.targetRight)
+    if (this.targetRight.length > 0) {
+      this.targetRight.forEach(item => {
+        empty.push(
+          {
+            id: item.key,
+            value: item.label,
+            isSelect: false
+          }
+        )
+      })
+      this.data2 = empty
+      this.changeTargetData = empty
+    }
 },
 watch: {
   sourceLeft () {
@@ -137,6 +153,7 @@ watch: {
   },
   targetRight () {
     let empty = []
+    console.log(this.targetRight)
     if (this.targetRight.length > 0) {
       this.targetRight.forEach(item => {
         empty.push(
@@ -331,7 +348,7 @@ computed: {
   .box .title span:first-child {
     display: inline-block;
     background: #f5f7fa;
-    background-image: url(../public/check-box-outline-blank.png);
+    background-image: url(../../public/check-box-outline-blank.png);
     background-repeat: no-repeat;
     background-position: 10px center;
     background-size: 20px 20px;
@@ -339,7 +356,7 @@ computed: {
     cursor: pointer;
   }
   .box .title span:first-child.active {
-    background-image: url(../public/check_box.png);
+    background-image: url(../../public/check_box.png);
   }
   .left, .right {
     width: 245px;
@@ -352,7 +369,7 @@ computed: {
   .left >div , .right > div {
     cursor: pointer;
     text-align: left;
-    background-image: url(../public/check-box-outline-blank.png);
+    background-image: url(../../public/check-box-outline-blank.png);
     background-repeat: no-repeat;
     background-position: 10px center;
     background-size: 20px 20px;
@@ -361,7 +378,7 @@ computed: {
     line-height: 30px;
   }
   .left > div.active , .right > div.active {
-    background-image: url(../public/check_box.png);
+    background-image: url(../../public/check_box.png);
   }
   .left > div.hover-color:hover, .right > div.hover-color:hover {
     color: rgb(64, 158, 255);
@@ -403,7 +420,7 @@ computed: {
   } */
   .search_input {
     width: 220px;
-    height: 40px;
+    height: 10px;
     border-radius: 50px;
     border: 1px solid #ccc;
     outline: none;
